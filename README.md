@@ -1,34 +1,211 @@
-# JSON CRUD Operations
+# VDBMS - SQL-to-JSON Database Engine
 
-A simple, lightweight Python library for performing CRUD (Create, Read, Update, Delete) operations on JSON files, treating them as database tables. Now with **configuration-based file management** for organized database storage.
+A lightweight, file-based database management system that provides a complete SQL interface for JSON-based database operations. Execute standard SQL statements on JSON files as if they were database tables, with full schema management, constraint validation, and an interactive SQL console.
 
-## Features
+## 🚀 Key Features
 
-- **Complete CRUD Operations**: Insert, read, update, and delete records
-- **Configuration Management**: Centralized settings via `settings.json`
-- **Organized File Storage**: All database files stored in configurable directory (default: `db/`)
+### Complete SQL Database Interface
+- **Full SQL Support**: `CREATE TABLE`, `INSERT`, `SELECT`, `UPDATE`, `DELETE` statements
+- **Schema Management**: Persistent table schemas with data type definitions
+- **Constraint Validation**: `PRIMARY KEY`, `UNIQUE`, `NOT NULL`, `AUTO_INCREMENT` support
+- **Complex Queries**: WHERE clauses with `AND`/`OR` logic, parentheses grouping, and `LIKE` pattern matching
+- **Interactive SQL Console**: Command-line interface for executing SQL statements
+
+### JSON-Based Storage
+- **Human-Readable**: All data stored as formatted JSON files
+- **File-Based**: No database server required - just files on disk
+- **Configurable Storage**: Organized database directory structure
+- **Schema Registry**: Persistent schema storage in `_schemas.json`
+
+### Direct JSON CRUD Operations
+- **JSONDatabase Class**: Direct programmatic access to JSON files
 - **Automatic ID Generation**: UUID-based unique identifiers
 - **Timestamp Tracking**: Automatic `created_at` and `updated_at` timestamps
 - **Filtering Support**: Query records with custom filters
-- **Error Handling**: Comprehensive error handling with meaningful messages
-- **Type Safety**: Full type hints for better IDE support
 - **Convenience Functions**: Simple functions for quick operations
-- **Database Management**: List, inspect, and manage multiple databases
 
-## Installation
+## 📦 Installation
 
-No external dependencies required! Just copy the files to your project.
-
+### Requirements
 ```bash
-# Copy these files to your project:
-# - json_crud.py (main CRUD operations)
-# - config.py (configuration management)
-# - settings.json (configuration file)
+pip install ply>=3.11
 ```
 
-## Configuration
+### Quick Setup
+```bash
+# Clone or download the project
+git clone <repository-url>
+cd vdbms
 
-The system uses a `settings.json` file for configuration:
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the interactive SQL console
+python sql_json_engine.py
+```
+
+## 🎯 Quick Start
+
+### Interactive SQL Console
+
+```bash
+python sql_json_engine.py
+```
+
+```sql
+SQL> CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) UNIQUE,
+    age INT
+);
+
+SQL> INSERT INTO users (name, email, age) VALUES 
+    ('John Doe', 'john@example.com', 30),
+    ('Jane Smith', 'jane@example.com', 25);
+
+SQL> SELECT * FROM users WHERE age > 25;
+
+SQL> UPDATE users SET age = 31 WHERE name = 'John Doe';
+
+SQL> DELETE FROM users WHERE age < 18;
+```
+
+### Programmatic SQL Interface
+
+```python
+from sql_json_engine import SQLToJSONEngine
+
+# Create engine instance
+engine = SQLToJSONEngine()
+
+# Create table
+result = engine.execute_sql("""
+    CREATE TABLE products (
+        id INT PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        price FLOAT,
+        category VARCHAR(50)
+    )
+""")
+
+# Insert data
+result = engine.execute_sql("""
+    INSERT INTO products VALUES 
+    (1, 'Laptop', 999.99, 'Electronics'),
+    (2, 'Book', 29.99, 'Education')
+""")
+
+# Query data
+result = engine.execute_sql("SELECT * FROM products WHERE price > 50")
+print(f"Found {result['count']} products")
+for product in result['records']:
+    print(f"- {product['name']}: ${product['price']}")
+```
+
+### Direct JSON Operations
+
+```python
+from json_crud import JSONDatabase
+
+# Create database instance (stored in db/inventory.json)
+db = JSONDatabase("inventory")
+
+# Insert records
+item_id = db.insert({
+    "name": "Widget",
+    "quantity": 100,
+    "price": 25.99
+})
+
+# Query with filters
+expensive_items = db.read(filters={"price": lambda x: x > 20})
+
+# Update records
+db.update(item_id, {"quantity": 95})
+
+# Delete records
+db.delete(item_id)
+```
+
+## 🏗️ Project Structure
+
+```
+vdbms/
+├── sql_json_engine.py         # Main SQL-to-JSON integration engine
+├── sql_parser.py              # PLY-based SQL parser with AST generation
+├── json_crud.py               # JSON CRUD operations with validation
+├── config.py                  # Configuration management system
+├── settings.json              # Configuration file
+├── test_sql_json_engine.py    # Integration tests
+├── test_sql_parser.py         # SQL parser tests
+├── test_json_crud.py          # JSON CRUD tests
+├── example_usage.py           # Usage examples
+├── requirements.txt           # Dependencies
+└── db/                        # Database files directory
+    ├── _schemas.json          # Table schema registry
+    ├── users.json             # Example table files
+    ├── products.json
+    └── orders.json
+```
+
+## 📊 Supported SQL Features
+
+### Data Definition Language (DDL)
+```sql
+-- Create tables with constraints
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) UNIQUE,
+    age INT,
+    created_at TIMESTAMP
+);
+
+-- Show table information
+SHOW TABLES;
+DESCRIBE users;
+```
+
+### Data Manipulation Language (DML)
+```sql
+-- Insert single or multiple records
+INSERT INTO users (name, email, age) VALUES ('John', 'john@example.com', 30);
+INSERT INTO users (name, email) VALUES ('Jane', 'jane@example.com'), ('Bob', 'bob@example.com');
+
+-- Select with complex conditions
+SELECT name, email FROM users WHERE age > 18 AND email LIKE '%@example.com';
+SELECT * FROM users WHERE (age > 20 AND age < 40) OR name = 'Admin';
+
+-- Update with conditions
+UPDATE users SET age = 31, email = 'newemail@example.com' WHERE id = 1;
+
+-- Delete with conditions
+DELETE FROM users WHERE age < 18 OR name LIKE 'test%';
+```
+
+### Supported Data Types
+- `INT`, `INTEGER`
+- `VARCHAR(size)`, `TEXT`
+- `FLOAT`, `DOUBLE`
+- `BOOLEAN`
+- `DATE`, `DATETIME`, `TIMESTAMP`
+
+### Supported Constraints
+- `PRIMARY KEY` - Unique identifier for records
+- `UNIQUE` - Ensure column values are unique
+- `NOT NULL` - Prevent null values
+- `AUTO_INCREMENT` - Automatic ID generation
+
+### Supported Operators
+- **Comparison**: `=`, `!=`, `<>`, `<`, `>`, `<=`, `>=`
+- **Pattern Matching**: `LIKE` with `%` and `_` wildcards
+- **Logical**: `AND`, `OR`, `NOT`
+- **Grouping**: Parentheses `()` for complex conditions
+
+## ⚙️ Configuration
+
+The system uses `settings.json` for configuration:
 
 ```json
 {
@@ -52,266 +229,170 @@ The system uses a `settings.json` file for configuration:
 }
 ```
 
-### Key Configuration Options
+### Configuration Management
+```python
+from config import config
 
-- **`database.directory`**: Where database files are stored (default: `"db"`)
-- **`database.auto_create_directory`**: Automatically create the database directory
-- **`database.default_file_extension`**: File extension for database files
-- **`performance.pretty_print`**: Format JSON with indentation for readability
+# View current settings
+print(f"Database directory: {config.db_directory}")
+print(f"Pretty print JSON: {config.pretty_print}")
 
-## Quick Start
+# Change settings
+config.set('database.directory', 'my_data')
+config.set('performance.pretty_print', False)
+```
 
-### Using the JSONDatabase Class
+## 🧪 Testing
+
+Run the comprehensive test suite:
+
+```bash
+# Test SQL-JSON integration
+python test_sql_json_engine.py
+
+# Test SQL parser
+python test_sql_parser.py
+
+# Test JSON CRUD operations
+python test_json_crud.py
+
+# Run all tests
+python -m unittest discover -s . -p "test_*.py"
+```
+
+## 📝 Examples
+
+### E-commerce Database Example
+
+```sql
+-- Create product catalog
+CREATE TABLE products (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    price FLOAT NOT NULL,
+    category VARCHAR(100),
+    stock_quantity INT,
+    created_at TIMESTAMP
+);
+
+-- Create customer table
+CREATE TABLE customers (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) UNIQUE,
+    phone VARCHAR(20),
+    address TEXT
+);
+
+-- Create orders table
+CREATE TABLE orders (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    total_amount FLOAT,
+    order_date TIMESTAMP
+);
+
+-- Insert sample data
+INSERT INTO products (name, price, category, stock_quantity) VALUES
+    ('Laptop Pro', 1299.99, 'Electronics', 50),
+    ('Wireless Mouse', 29.99, 'Electronics', 200),
+    ('Office Chair', 199.99, 'Furniture', 25);
+
+INSERT INTO customers (name, email, phone) VALUES
+    ('John Doe', 'john@example.com', '555-0123'),
+    ('Jane Smith', 'jane@example.com', '555-0456');
+
+-- Query examples
+SELECT p.name, p.price, p.stock_quantity 
+FROM products p 
+WHERE p.category = 'Electronics' AND p.price < 100;
+
+SELECT c.name, c.email 
+FROM customers c 
+WHERE c.email LIKE '%@example.com';
+
+-- Update inventory
+UPDATE products SET stock_quantity = stock_quantity - 1 WHERE id = 1;
+
+-- Clean up old test data
+DELETE FROM orders WHERE order_date < '2023-01-01';
+```
+
+## 🎯 Use Cases
+
+### Perfect For:
+- **Prototyping**: Quick database setup without installing a full RDBMS
+- **Small to Medium Applications**: Projects with < 10,000 records per table
+- **Educational Projects**: Learning SQL concepts with visible, editable data files
+- **Development/Testing**: Local development where you want to inspect data files directly
+- **Configuration Storage**: Structured configuration data with SQL query capabilities
+- **Embedded Applications**: Applications that need a database but can't install a server
+- **Data Analysis Scripts**: Quick data manipulation with familiar SQL syntax
+
+### Not Suitable For:
+- **High-Concurrency Applications**: File-based storage doesn't support concurrent writes
+- **Large Datasets**: Entire files are loaded into memory
+- **Production Systems**: Lacks advanced features like indexing, transactions, replication
+- **Real-time Applications**: No optimization for high-performance queries
+
+## 🔧 API Reference
+
+### SQLToJSONEngine Class
+
+```python
+from sql_json_engine import SQLToJSONEngine
+
+engine = SQLToJSONEngine()
+
+# Execute SQL statements
+result = engine.execute_sql("SELECT * FROM users")
+
+# List all tables
+tables = engine.list_tables()
+
+# Get table schema
+schema = engine.describe_table("users")
+
+# Drop table
+result = engine.drop_table("old_table")
+```
+
+### JSONDatabase Class
 
 ```python
 from json_crud import JSONDatabase
 
-# Create a database instance (file will be stored in db/users.json)
-db = JSONDatabase("users")
+db = JSONDatabase("table_name")
 
-# Insert a record
-user_id = db.insert({
-    "name": "John Doe",
-    "email": "john@example.com",
-    "age": 30
-})
+# CRUD operations
+record_id = db.insert({"name": "John", "age": 30})
+records = db.read(filters={"age": lambda x: x > 25})
+updated = db.update(record_id, {"age": 31})
+deleted = db.delete(record_id)
 
-# Read all records
-all_users = db.read()
-
-# Read a specific record
-user = db.read(record_id=user_id)
-
-# Read with filters
-adults = db.read(filters={"age": 30})
-
-# Update a record
-updated_user = db.update(user_id, {"age": 31})
-
-# Delete a record
-deleted = db.delete(user_id)
-
-# Count records
-total_users = db.count()
-
-# Get database info
-print(f"Database stored at: {db.database_path}")
+# Utility methods
+count = db.count()
+db.clear()  # Remove all records
 ```
 
-### Using Convenience Functions
+### Convenience Functions
 
 ```python
 from json_crud import insert_record, read_records, update_record, delete_record
 
-# Insert (creates db/users.json)
-user_id = insert_record("users", {"name": "Jane", "age": 25})
-
-# Read
-users = read_records("users")
-specific_user = read_records("users", record_id=user_id)
-
-# Update
-updated = update_record("users", user_id, {"age": 26})
-
-# Delete
+# Quick operations without creating database instances
+user_id = insert_record("users", {"name": "Jane"})
+users = read_records("users", filters={"active": True})
+updated = update_record("users", user_id, {"last_login": "2023-12-07"})
 deleted = delete_record("users", user_id)
 ```
 
-### Database Management
+## 📄 File Format
 
-```python
-from json_crud import list_databases, get_database_info
-
-# List all database files
-databases = list_databases()
-print("Available databases:", databases)
-
-# Get detailed information about a database
-info = get_database_info("users")
-print(f"Records: {info['record_count']}")
-print(f"File size: {info['file_size_bytes']} bytes")
-print(f"Created: {info['created']}")
-```
-
-### Configuration Management
-
-```python
-from config import config
-
-# View current configuration
-print(f"Database directory: {config.db_directory}")
-print(f"Pretty print: {config.pretty_print}")
-
-# Change configuration
-config.set('database.directory', 'my_databases')
-config.set('performance.pretty_print', False)
-
-# Get database path
-path = config.get_db_path("example")  # Returns: my_databases/example.json
-```
-
-## File Structure
-
-With the configuration system, your project structure will look like:
-
-```
-your_project/
-├── json_crud.py          # Main CRUD operations
-├── config.py             # Configuration management
-├── settings.json         # Configuration file
-├── example_usage.py      # Usage examples
-├── test_json_crud.py     # Test suite
-└── db/                   # Database files directory
-    ├── users.json
-    ├── products.json
-    ├── orders.json
-    └── ...
-```
-
-## API Reference
-
-### JSONDatabase Class
-
-#### Constructor
-```python
-JSONDatabase(file_path: str)
-```
-Creates a new database instance. The file will be stored in the configured database directory.
-
-- **file_path**: Database filename (without path, e.g., "users" or "users.json")
-
-#### Methods
-
-##### `insert(record: Dict[str, Any], auto_id: bool = True) -> str`
-Insert a new record into the database.
-
-##### `read(record_id: Optional[str] = None, filters: Optional[Dict[str, Any]] = None) -> Union[Dict[str, Any], List[Dict[str, Any]]]`
-Read records from the database.
-
-##### `update(record_id: str, updates: Dict[str, Any]) -> Dict[str, Any]`
-Update an existing record.
-
-##### `delete(record_id: str) -> bool`
-Delete a record from the database.
-
-##### `count(filters: Optional[Dict[str, Any]] = None) -> int`
-Count records in the database.
-
-##### `clear() -> None`
-Remove all records from the database.
-
-#### Properties
-
-##### `database_path -> str`
-Get the full path to the database file.
-
-##### `database_name -> str`
-Get the database filename without path.
-
-### Convenience Functions
-
-#### `insert_record(file_path: str, record: Dict[str, Any], auto_id: bool = True) -> str`
-Insert a record into a database file.
-
-#### `read_records(file_path: str, record_id: Optional[str] = None, filters: Optional[Dict[str, Any]] = None)`
-Read records from a database file.
-
-#### `update_record(file_path: str, record_id: str, updates: Dict[str, Any]) -> Dict[str, Any]`
-Update a record in a database file.
-
-#### `delete_record(file_path: str, record_id: str) -> bool`
-Delete a record from a database file.
-
-#### `list_databases() -> List[str]`
-List all database files in the configured directory.
-
-#### `get_database_info(file_path: str) -> Dict[str, Any]`
-Get detailed information about a database file.
-
-### Configuration Class
-
-#### `config.get(key: str, default: Any = None) -> Any`
-Get configuration value using dot notation (e.g., `"database.directory"`).
-
-#### `config.set(key: str, value: Any) -> None`
-Set configuration value using dot notation.
-
-#### `config.get_db_path(filename: str) -> str`
-Get full path for a database file in the configured directory.
-
-## Examples
-
-### Basic CRUD Operations
-
-```python
-from json_crud import JSONDatabase
-
-# Initialize database (stored in db/products.json)
-db = JSONDatabase("products")
-
-# Create
-product_id = db.insert({
-    "name": "Laptop",
-    "price": 999.99,
-    "category": "Electronics",
-    "in_stock": True
-})
-
-# Read
-product = db.read(record_id=product_id)
-all_products = db.read()
-electronics = db.read(filters={"category": "Electronics"})
-
-# Update
-updated_product = db.update(product_id, {
-    "price": 899.99,
-    "on_sale": True
-})
-
-# Delete
-deleted = db.delete(product_id)
-```
-
-### Multiple Databases
-
-```python
-from json_crud import JSONDatabase, list_databases
-
-# Create multiple databases
-users_db = JSONDatabase("users")
-orders_db = JSONDatabase("orders")
-products_db = JSONDatabase("products")
-
-# Add data to each
-users_db.insert({"name": "Alice", "email": "alice@example.com"})
-orders_db.insert({"user": "alice", "total": 150.00})
-products_db.insert({"name": "Widget", "price": 25.99})
-
-# List all databases
-databases = list_databases()
-print("Available databases:", databases)
-# Output: ['orders.json', 'products.json', 'users.json']
-```
-
-### Configuration Changes
-
-```python
-from config import config
-from json_crud import JSONDatabase
-
-# Change database directory
-config.set('database.directory', 'data')
-
-# Now databases will be stored in data/ instead of db/
-db = JSONDatabase("test")  # Creates data/test.json
-
-# Change formatting
-config.set('performance.pretty_print', False)  # Compact JSON
-```
-
-## File Format
-
-Database files are stored as JSON arrays in the configured directory:
+Database files are stored as JSON arrays with automatic metadata:
 
 ```json
 [
@@ -326,66 +407,41 @@ Database files are stored as JSON arrays in the configured directory:
 ]
 ```
 
-## Running Tests
-
-Run the comprehensive test suite:
-
-```bash
-python test_json_crud.py
+Schema registry (`_schemas.json`):
+```json
+{
+  "users": {
+    "table_name": "users",
+    "columns": {
+      "id": {"type": "INT", "constraints": ["PRIMARY KEY", "AUTO_INCREMENT"]},
+      "name": {"type": "VARCHAR", "size": 100, "constraints": ["NOT NULL"]},
+      "email": {"type": "VARCHAR", "size": 255, "constraints": ["UNIQUE"]}
+    },
+    "constraints": {
+      "primary_key": "id",
+      "unique": ["email"]
+    },
+    "created_at": "2023-12-07T10:30:00.123456"
+  }
+}
 ```
 
-Run examples:
+## 🤝 Contributing
 
+Contributions are welcome! Please feel free to submit issues, feature requests, or pull requests.
+
+### Development Setup
 ```bash
-python example_usage.py
+git clone <repository-url>
+cd vdbms
+pip install -r requirements.txt
+python -m unittest discover -s . -p "test_*.py"
 ```
 
-## Migration from Previous Version
+## 📜 License
 
-If you have existing JSON database files, simply:
+This project is released into the public domain. Use it however you like!
 
-1. Create a `db/` directory
-2. Move your `.json` files into the `db/` directory
-3. Update your code to use filenames without paths:
-   ```python
-   # Old way
-   db = JSONDatabase("path/to/users.json")
-   
-   # New way
-   db = JSONDatabase("users")  # Will use db/users.json
-   ```
+---
 
-## Error Handling
-
-The library provides comprehensive error handling:
-
-- **ValueError**: Invalid input data, empty records, missing record IDs
-- **IOError**: File operation errors (permissions, disk space, etc.)
-- **Configuration errors**: Invalid settings, missing directories
-
-## Limitations
-
-- **File-based**: Not suitable for high-concurrency applications
-- **Memory usage**: Entire file is loaded into memory for operations
-- **No indexing**: Linear search for filtering operations
-- **No transactions**: No atomic operations across multiple records
-- **No schema validation**: Records can have any structure
-
-## Use Cases
-
-Perfect for:
-- Small to medium datasets (< 10,000 records)
-- Configuration storage
-- Prototyping and development
-- Simple data persistence
-- Educational projects
-- Applications where a full database is overkill
-- Multi-tenant applications (separate database per tenant)
-
-## Contributing
-
-Feel free to submit issues, feature requests, or pull requests!
-
-## License
-
-This project is released into the public domain. Use it however you like! 
+**VDBMS** - Where SQL meets JSON simplicity 🚀 
