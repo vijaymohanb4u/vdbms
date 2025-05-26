@@ -1,0 +1,24 @@
+"filename", "language", "Python", "JSON with Comments", "pip requirements", "Markdown", "Ignore", "JSON", "comment", "blank", "total"
+"c:\Users\vavullapati\Documents\code\vdb\.cursorindexingignore", "Ignore", 0, 0, 0, 0, 1, 0, 1, 2, 4
+"c:\Users\vavullapati\Documents\code\vdb\.specstory\history\2025-05-25_04-24-python-crud-operations-for-json-files.md", "Markdown", 0, 0, 0, 9, 0, 0, 0, 12, 21
+"c:\Users\vavullapati\Documents\code\vdb\.specstory\history\2025-05-25_04-26-python-crud-operations-on-json-files.md", "Markdown", 0, 0, 0, 9457, 0, 0, 0, 1115, 10572
+"c:\Users\vavullapati\Documents\code\vdb\README.md", "Markdown", 0, 0, 0, 284, 0, 0, 0, 107, 391
+"c:\Users\vavullapati\Documents\code\vdb\README_SQL_JSON_Integration.md", "Markdown", 0, 0, 0, 420, 0, 0, 0, 137, 557
+"c:\Users\vavullapati\Documents\code\vdb\README_SQL_Parser.md", "Markdown", 0, 0, 0, 295, 0, 0, 0, 107, 402
+"c:\Users\vavullapati\Documents\code\vdb\config.py", "Python", 135, 0, 0, 0, 0, 0, 8, 32, 175
+"c:\Users\vavullapati\Documents\code\vdb\db\_schemas.json", "JSON", 0, 0, 0, 0, 0, 28, 0, 0, 28
+"c:\Users\vavullapati\Documents\code\vdb\db\users.json", "JSON", 0, 0, 0, 0, 0, 16, 0, 0, 16
+"c:\Users\vavullapati\Documents\code\vdb\example_sql_json.py", "Python", 254, 0, 0, 0, 0, 0, 27, 74, 355
+"c:\Users\vavullapati\Documents\code\vdb\example_usage.py", "Python", 164, 0, 0, 0, 0, 0, 37, 64, 265
+"c:\Users\vavullapati\Documents\code\vdb\json_crud.py", "Python", 324, 0, 0, 0, 0, 0, 16, 91, 431
+"c:\Users\vavullapati\Documents\code\vdb\parsetab.py", "Python", 82, 0, 0, 0, 0, 0, 3, 8, 93
+"c:\Users\vavullapati\Documents\code\vdb\quick_test.py", "Python", 31, 0, 0, 0, 0, 0, 11, 15, 57
+"c:\Users\vavullapati\Documents\code\vdb\requirements.txt", "pip requirements", 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\vavullapati\Documents\code\vdb\settings.json", "JSON with Comments", 0, 19, 0, 0, 0, 0, 0, 0, 19
+"c:\Users\vavullapati\Documents\code\vdb\sql_json_engine.py", "Python", 527, 0, 0, 0, 0, 0, 46, 109, 682
+"c:\Users\vavullapati\Documents\code\vdb\sql_parser.py", "Python", 480, 0, 0, 0, 0, 0, 40, 114, 634
+"c:\Users\vavullapati\Documents\code\vdb\sql_parser_example.py", "Python", 195, 0, 0, 0, 0, 0, 6, 46, 247
+"c:\Users\vavullapati\Documents\code\vdb\test_json_crud.py", "Python", 261, 0, 0, 0, 0, 0, 58, 96, 415
+"c:\Users\vavullapati\Documents\code\vdb\test_sql_json_engine.py", "Python", 363, 0, 0, 0, 0, 0, 60, 101, 524
+"c:\Users\vavullapati\Documents\code\vdb\test_sql_parser.py", "Python", 347, 0, 0, 0, 0, 0, 16, 85, 448
+"Total", "-", 3163, 19, 1, 10465, 1, 44, 329, 2315, 16337

@@ -1,0 +1,28 @@
+{
+  "users": {
+    "table_name": "users",
+    "columns": {
+      "id": {
+        "type": "INT",
+        "size": null,
+        "constraints": [
+          "PRIMARY KEY"
+        ]
+      },
+      "name": {
+        "type": "VARCHAR",
+        "size": 100,
+        "constraints": []
+      },
+      "age": {
+        "type": "INT",
+        "size": null,
+        "constraints": []
+      }
+    },
+    "constraints": {
+      "primary_key": "id"
+    },
+    "created_at": "2025-05-26T13:32:15.447443"
+  }
+}

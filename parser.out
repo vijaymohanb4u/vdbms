@@ -1,0 +1,1402 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    SEMICOLON
+
+Grammar
+
+Rule 0     S' -> statement
+Rule 1     statement -> create_table_statement
+Rule 2     statement -> insert_statement
+Rule 3     statement -> select_statement
+Rule 4     statement -> update_statement
+Rule 5     statement -> delete_statement
+Rule 6     create_table_statement -> CREATE TABLE IDENTIFIER LPAREN column_definitions RPAREN
+Rule 7     column_definitions -> column_definition
+Rule 8     column_definitions -> column_definitions COMMA column_definition
+Rule 9     column_definition -> IDENTIFIER data_type
+Rule 10    column_definition -> IDENTIFIER data_type column_constraints
+Rule 11    data_type -> VARCHAR LPAREN NUMBER RPAREN
+Rule 12    data_type -> INT
+Rule 13    data_type -> INTEGER
+Rule 14    data_type -> FLOAT
+Rule 15    data_type -> DOUBLE
+Rule 16    data_type -> TEXT
+Rule 17    data_type -> BOOLEAN
+Rule 18    data_type -> DATE
+Rule 19    data_type -> DATETIME
+Rule 20    data_type -> TIMESTAMP
+Rule 21    column_constraints -> column_constraint
+Rule 22    column_constraints -> column_constraints column_constraint
+Rule 23    column_constraint -> PRIMARY KEY
+Rule 24    column_constraint -> UNIQUE
+Rule 25    column_constraint -> AUTO_INCREMENT
+Rule 26    column_constraint -> NOT NULL
+Rule 27    insert_statement -> INSERT INTO IDENTIFIER VALUES value_lists
+Rule 28    insert_statement -> INSERT INTO IDENTIFIER LPAREN column_list RPAREN VALUES value_lists
+Rule 29    column_list -> IDENTIFIER
+Rule 30    column_list -> column_list COMMA IDENTIFIER
+Rule 31    value_lists -> value_list
+Rule 32    value_lists -> value_lists COMMA value_list
+Rule 33    value_list -> LPAREN values RPAREN
+Rule 34    values -> value
+Rule 35    values -> values COMMA value
+Rule 36    value -> STRING
+Rule 37    value -> NUMBER
+Rule 38    value -> FLOAT_NUMBER
+Rule 39    value -> NULL
+Rule 40    select_statement -> SELECT select_list FROM IDENTIFIER
+Rule 41    select_statement -> SELECT select_list FROM IDENTIFIER where_clause
+Rule 42    select_list -> ASTERISK
+Rule 43    select_list -> column_list
+Rule 44    update_statement -> UPDATE IDENTIFIER SET assignment_list
+Rule 45    update_statement -> UPDATE IDENTIFIER SET assignment_list where_clause
+Rule 46    assignment_list -> assignment
+Rule 47    assignment_list -> assignment_list COMMA assignment
+Rule 48    assignment -> IDENTIFIER EQUALS value
+Rule 49    delete_statement -> DELETE FROM IDENTIFIER
+Rule 50    delete_statement -> DELETE FROM IDENTIFIER where_clause
+Rule 51    where_clause -> WHERE condition
+Rule 52    condition -> condition AND condition
+Rule 53    condition -> condition OR condition
+Rule 54    condition -> comparison
+Rule 55    condition -> LPAREN condition RPAREN
+Rule 56    comparison -> IDENTIFIER EQUALS value
+Rule 57    comparison -> IDENTIFIER NOT_EQUALS value
+Rule 58    comparison -> IDENTIFIER LESS_THAN value
+Rule 59    comparison -> IDENTIFIER GREATER_THAN value
+Rule 60    comparison -> IDENTIFIER LESS_EQUAL value
+Rule 61    comparison -> IDENTIFIER GREATER_EQUAL value
+Rule 62    comparison -> IDENTIFIER LIKE value
+
+Terminals, with rules where they appear
+
+AND                  : 52
+ASTERISK             : 42
+AUTO_INCREMENT       : 25
+BOOLEAN              : 17
+COMMA                : 8 30 32 35 47
+CREATE               : 6
+DATE                 : 18
+DATETIME             : 19
+DELETE               : 49 50
+DOUBLE               : 15
+EQUALS               : 48 56
+FLOAT                : 14
+FLOAT_NUMBER         : 38
+FROM                 : 40 41 49 50
+GREATER_EQUAL        : 61
+GREATER_THAN         : 59
+IDENTIFIER           : 6 9 10 27 28 29 30 40 41 44 45 48 49 50 56 57 58 59 60 61 62
+INSERT               : 27 28
+INT                  : 12
+INTEGER              : 13
+INTO                 : 27 28
+KEY                  : 23
+LESS_EQUAL           : 60
+LESS_THAN            : 58
+LIKE                 : 62
+LPAREN               : 6 11 28 33 55
+NOT                  : 26
+NOT_EQUALS           : 57
+NULL                 : 26 39
+NUMBER               : 11 37
+OR                   : 53
+PRIMARY              : 23
+RPAREN               : 6 11 28 33 55
+SELECT               : 40 41
+SEMICOLON            : 
+SET                  : 44 45
+STRING               : 36
+TABLE                : 6
+TEXT                 : 16
+TIMESTAMP            : 20
+UNIQUE               : 24
+UPDATE               : 44 45
+VALUES               : 27 28
+VARCHAR              : 11
+WHERE                : 51
+error                : 
+
+Nonterminals, with rules where they appear
+
+assignment           : 46 47
+assignment_list      : 44 45 47
+column_constraint    : 21 22
+column_constraints   : 10 22
+column_definition    : 7 8
+column_definitions   : 6 8
+column_list          : 28 30 43
+comparison           : 54
+condition            : 51 52 52 53 53 55
+create_table_statement : 1
+data_type            : 9 10
+delete_statement     : 5
+insert_statement     : 2
+select_list          : 40 41
+select_statement     : 3
+statement            : 0
+update_statement     : 4
+value                : 34 35 48 56 57 58 59 60 61 62
+value_list           : 31 32
+value_lists          : 27 28 32
+values               : 33 35
+where_clause         : 41 45 50
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . statement
+    (1) statement -> . create_table_statement
+    (2) statement -> . insert_statement
+    (3) statement -> . select_statement
+    (4) statement -> . update_statement
+    (5) statement -> . delete_statement
+    (6) create_table_statement -> . CREATE TABLE IDENTIFIER LPAREN column_definitions RPAREN
+    (27) insert_statement -> . INSERT INTO IDENTIFIER VALUES value_lists
+    (28) insert_statement -> . INSERT INTO IDENTIFIER LPAREN column_list RPAREN VALUES value_lists
+    (40) select_statement -> . SELECT select_list FROM IDENTIFIER
+    (41) select_statement -> . SELECT select_list FROM IDENTIFIER where_clause
+    (44) update_statement -> . UPDATE IDENTIFIER SET assignment_list
+    (45) update_statement -> . UPDATE IDENTIFIER SET assignment_list where_clause
+    (49) delete_statement -> . DELETE FROM IDENTIFIER
+    (50) delete_statement -> . DELETE FROM IDENTIFIER where_clause
+
+    CREATE          shift and go to state 7
+    INSERT          shift and go to state 8
+    SELECT          shift and go to state 9
+    UPDATE          shift and go to state 10
+    DELETE          shift and go to state 11
+
+    statement                      shift and go to state 1
+    create_table_statement         shift and go to state 2
+    insert_statement               shift and go to state 3
+    select_statement               shift and go to state 4
+    update_statement               shift and go to state 5
+    delete_statement               shift and go to state 6
+
+state 1
+
+    (0) S' -> statement .
+
+
+
+state 2
+
+    (1) statement -> create_table_statement .
+
+    $end            reduce using rule 1 (statement -> create_table_statement .)
+
+
+state 3
+
+    (2) statement -> insert_statement .
+
+    $end            reduce using rule 2 (statement -> insert_statement .)
+
+
+state 4
+
+    (3) statement -> select_statement .
+
+    $end            reduce using rule 3 (statement -> select_statement .)
+
+
+state 5
+
+    (4) statement -> update_statement .
+
+    $end            reduce using rule 4 (statement -> update_statement .)
+
+
+state 6
+
+    (5) statement -> delete_statement .
+
+    $end            reduce using rule 5 (statement -> delete_statement .)
+
+
+state 7
+
+    (6) create_table_statement -> CREATE . TABLE IDENTIFIER LPAREN column_definitions RPAREN
+
+    TABLE           shift and go to state 12
+
+
+state 8
+
+    (27) insert_statement -> INSERT . INTO IDENTIFIER VALUES value_lists
+    (28) insert_statement -> INSERT . INTO IDENTIFIER LPAREN column_list RPAREN VALUES value_lists
+
+    INTO            shift and go to state 13
+
+
+state 9
+
+    (40) select_statement -> SELECT . select_list FROM IDENTIFIER
+    (41) select_statement -> SELECT . select_list FROM IDENTIFIER where_clause
+    (42) select_list -> . ASTERISK
+    (43) select_list -> . column_list
+    (29) column_list -> . IDENTIFIER
+    (30) column_list -> . column_list COMMA IDENTIFIER
+
+    ASTERISK        shift and go to state 16
+    IDENTIFIER      shift and go to state 15
+
+    select_list                    shift and go to state 14
+    column_list                    shift and go to state 17
+
+state 10
+
+    (44) update_statement -> UPDATE . IDENTIFIER SET assignment_list
+    (45) update_statement -> UPDATE . IDENTIFIER SET assignment_list where_clause
+
+    IDENTIFIER      shift and go to state 18
+
+
+state 11
+
+    (49) delete_statement -> DELETE . FROM IDENTIFIER
+    (50) delete_statement -> DELETE . FROM IDENTIFIER where_clause
+
+    FROM            shift and go to state 19
+
+
+state 12
+
+    (6) create_table_statement -> CREATE TABLE . IDENTIFIER LPAREN column_definitions RPAREN
+
+    IDENTIFIER      shift and go to state 20
+
+
+state 13
+
+    (27) insert_statement -> INSERT INTO . IDENTIFIER VALUES value_lists
+    (28) insert_statement -> INSERT INTO . IDENTIFIER LPAREN column_list RPAREN VALUES value_lists
+
+    IDENTIFIER      shift and go to state 21
+
+
+state 14
+
+    (40) select_statement -> SELECT select_list . FROM IDENTIFIER
+    (41) select_statement -> SELECT select_list . FROM IDENTIFIER where_clause
+
+    FROM            shift and go to state 22
+
+
+state 15
+
+    (29) column_list -> IDENTIFIER .
+
+    COMMA           reduce using rule 29 (column_list -> IDENTIFIER .)
+    FROM            reduce using rule 29 (column_list -> IDENTIFIER .)
+    RPAREN          reduce using rule 29 (column_list -> IDENTIFIER .)
+
+
+state 16
+
+    (42) select_list -> ASTERISK .
+
+    FROM            reduce using rule 42 (select_list -> ASTERISK .)
+
+
+state 17
+
+    (43) select_list -> column_list .
+    (30) column_list -> column_list . COMMA IDENTIFIER
+
+    FROM            reduce using rule 43 (select_list -> column_list .)
+    COMMA           shift and go to state 23
+
+
+state 18
+
+    (44) update_statement -> UPDATE IDENTIFIER . SET assignment_list
+    (45) update_statement -> UPDATE IDENTIFIER . SET assignment_list where_clause
+
+    SET             shift and go to state 24
+
+
+state 19
+
+    (49) delete_statement -> DELETE FROM . IDENTIFIER
+    (50) delete_statement -> DELETE FROM . IDENTIFIER where_clause
+
+    IDENTIFIER      shift and go to state 25
+
+
+state 20
+
+    (6) create_table_statement -> CREATE TABLE IDENTIFIER . LPAREN column_definitions RPAREN
+
+    LPAREN          shift and go to state 26
+
+
+state 21
+
+    (27) insert_statement -> INSERT INTO IDENTIFIER . VALUES value_lists
+    (28) insert_statement -> INSERT INTO IDENTIFIER . LPAREN column_list RPAREN VALUES value_lists
+
+    VALUES          shift and go to state 27
+    LPAREN          shift and go to state 28
+
+
+state 22
+
+    (40) select_statement -> SELECT select_list FROM . IDENTIFIER
+    (41) select_statement -> SELECT select_list FROM . IDENTIFIER where_clause
+
+    IDENTIFIER      shift and go to state 29
+
+
+state 23
+
+    (30) column_list -> column_list COMMA . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 30
+
+
+state 24
+
+    (44) update_statement -> UPDATE IDENTIFIER SET . assignment_list
+    (45) update_statement -> UPDATE IDENTIFIER SET . assignment_list where_clause
+    (46) assignment_list -> . assignment
+    (47) assignment_list -> . assignment_list COMMA assignment
+    (48) assignment -> . IDENTIFIER EQUALS value
+
+    IDENTIFIER      shift and go to state 31
+
+    assignment_list                shift and go to state 32
+    assignment                     shift and go to state 33
+
+state 25
+
+    (49) delete_statement -> DELETE FROM IDENTIFIER .
+    (50) delete_statement -> DELETE FROM IDENTIFIER . where_clause
+    (51) where_clause -> . WHERE condition
+
+    $end            reduce using rule 49 (delete_statement -> DELETE FROM IDENTIFIER .)
+    WHERE           shift and go to state 35
+
+    where_clause                   shift and go to state 34
+
+state 26
+
+    (6) create_table_statement -> CREATE TABLE IDENTIFIER LPAREN . column_definitions RPAREN
+    (7) column_definitions -> . column_definition
+    (8) column_definitions -> . column_definitions COMMA column_definition
+    (9) column_definition -> . IDENTIFIER data_type
+    (10) column_definition -> . IDENTIFIER data_type column_constraints
+
+    IDENTIFIER      shift and go to state 36
+
+    column_definitions             shift and go to state 37
+    column_definition              shift and go to state 38
+
+state 27
+
+    (27) insert_statement -> INSERT INTO IDENTIFIER VALUES . value_lists
+    (31) value_lists -> . value_list
+    (32) value_lists -> . value_lists COMMA value_list
+    (33) value_list -> . LPAREN values RPAREN
+
+    LPAREN          shift and go to state 41
+
+    value_lists                    shift and go to state 39
+    value_list                     shift and go to state 40
+
+state 28
+
+    (28) insert_statement -> INSERT INTO IDENTIFIER LPAREN . column_list RPAREN VALUES value_lists
+    (29) column_list -> . IDENTIFIER
+    (30) column_list -> . column_list COMMA IDENTIFIER
+
+    IDENTIFIER      shift and go to state 15
+
+    column_list                    shift and go to state 42
+
+state 29
+
+    (40) select_statement -> SELECT select_list FROM IDENTIFIER .
+    (41) select_statement -> SELECT select_list FROM IDENTIFIER . where_clause
+    (51) where_clause -> . WHERE condition
+
+    $end            reduce using rule 40 (select_statement -> SELECT select_list FROM IDENTIFIER .)
+    WHERE           shift and go to state 35
+
+    where_clause                   shift and go to state 43
+
+state 30
+
+    (30) column_list -> column_list COMMA IDENTIFIER .
+
+    COMMA           reduce using rule 30 (column_list -> column_list COMMA IDENTIFIER .)
+    FROM            reduce using rule 30 (column_list -> column_list COMMA IDENTIFIER .)
+    RPAREN          reduce using rule 30 (column_list -> column_list COMMA IDENTIFIER .)
+
+
+state 31
+
+    (48) assignment -> IDENTIFIER . EQUALS value
+
+    EQUALS          shift and go to state 44
+
+
+state 32
+
+    (44) update_statement -> UPDATE IDENTIFIER SET assignment_list .
+    (45) update_statement -> UPDATE IDENTIFIER SET assignment_list . where_clause
+    (47) assignment_list -> assignment_list . COMMA assignment
+    (51) where_clause -> . WHERE condition
+
+    $end            reduce using rule 44 (update_statement -> UPDATE IDENTIFIER SET assignment_list .)
+    COMMA           shift and go to state 46
+    WHERE           shift and go to state 35
+
+    where_clause                   shift and go to state 45
+
+state 33
+
+    (46) assignment_list -> assignment .
+
+    COMMA           reduce using rule 46 (assignment_list -> assignment .)
+    WHERE           reduce using rule 46 (assignment_list -> assignment .)
+    $end            reduce using rule 46 (assignment_list -> assignment .)
+
+
+state 34
+
+    (50) delete_statement -> DELETE FROM IDENTIFIER where_clause .
+
+    $end            reduce using rule 50 (delete_statement -> DELETE FROM IDENTIFIER where_clause .)
+
+
+state 35
+
+    (51) where_clause -> WHERE . condition
+    (52) condition -> . condition AND condition
+    (53) condition -> . condition OR condition
+    (54) condition -> . comparison
+    (55) condition -> . LPAREN condition RPAREN
+    (56) comparison -> . IDENTIFIER EQUALS value
+    (57) comparison -> . IDENTIFIER NOT_EQUALS value
+    (58) comparison -> . IDENTIFIER LESS_THAN value
+    (59) comparison -> . IDENTIFIER GREATER_THAN value
+    (60) comparison -> . IDENTIFIER LESS_EQUAL value
+    (61) comparison -> . IDENTIFIER GREATER_EQUAL value
+    (62) comparison -> . IDENTIFIER LIKE value
+
+    LPAREN          shift and go to state 49
+    IDENTIFIER      shift and go to state 50
+
+    condition                      shift and go to state 47
+    comparison                     shift and go to state 48
+
+state 36
+
+    (9) column_definition -> IDENTIFIER . data_type
+    (10) column_definition -> IDENTIFIER . data_type column_constraints
+    (11) data_type -> . VARCHAR LPAREN NUMBER RPAREN
+    (12) data_type -> . INT
+    (13) data_type -> . INTEGER
+    (14) data_type -> . FLOAT
+    (15) data_type -> . DOUBLE
+    (16) data_type -> . TEXT
+    (17) data_type -> . BOOLEAN
+    (18) data_type -> . DATE
+    (19) data_type -> . DATETIME
+    (20) data_type -> . TIMESTAMP
+
+    VARCHAR         shift and go to state 52
+    INT             shift and go to state 53
+    INTEGER         shift and go to state 54
+    FLOAT           shift and go to state 55
+    DOUBLE          shift and go to state 56
+    TEXT            shift and go to state 57
+    BOOLEAN         shift and go to state 58
+    DATE            shift and go to state 59
+    DATETIME        shift and go to state 60
+    TIMESTAMP       shift and go to state 61
+
+    data_type                      shift and go to state 51
+
+state 37
+
+    (6) create_table_statement -> CREATE TABLE IDENTIFIER LPAREN column_definitions . RPAREN
+    (8) column_definitions -> column_definitions . COMMA column_definition
+
+    RPAREN          shift and go to state 62
+    COMMA           shift and go to state 63
+
+
+state 38
+
+    (7) column_definitions -> column_definition .
+
+    RPAREN          reduce using rule 7 (column_definitions -> column_definition .)
+    COMMA           reduce using rule 7 (column_definitions -> column_definition .)
+
+
+state 39
+
+    (27) insert_statement -> INSERT INTO IDENTIFIER VALUES value_lists .
+    (32) value_lists -> value_lists . COMMA value_list
+
+    $end            reduce using rule 27 (insert_statement -> INSERT INTO IDENTIFIER VALUES value_lists .)
+    COMMA           shift and go to state 64
+
+
+state 40
+
+    (31) value_lists -> value_list .
+
+    COMMA           reduce using rule 31 (value_lists -> value_list .)
+    $end            reduce using rule 31 (value_lists -> value_list .)
+
+
+state 41
+
+    (33) value_list -> LPAREN . values RPAREN
+    (34) values -> . value
+    (35) values -> . values COMMA value
+    (36) value -> . STRING
+    (37) value -> . NUMBER
+    (38) value -> . FLOAT_NUMBER
+    (39) value -> . NULL
+
+    STRING          shift and go to state 67
+    NUMBER          shift and go to state 68
+    FLOAT_NUMBER    shift and go to state 69
+    NULL            shift and go to state 70
+
+    values                         shift and go to state 65
+    value                          shift and go to state 66
+
+state 42
+
+    (28) insert_statement -> INSERT INTO IDENTIFIER LPAREN column_list . RPAREN VALUES value_lists
+    (30) column_list -> column_list . COMMA IDENTIFIER
+
+    RPAREN          shift and go to state 71
+    COMMA           shift and go to state 23
+
+
+state 43
+
+    (41) select_statement -> SELECT select_list FROM IDENTIFIER where_clause .
+
+    $end            reduce using rule 41 (select_statement -> SELECT select_list FROM IDENTIFIER where_clause .)
+
+
+state 44
+
+    (48) assignment -> IDENTIFIER EQUALS . value
+    (36) value -> . STRING
+    (37) value -> . NUMBER
+    (38) value -> . FLOAT_NUMBER
+    (39) value -> . NULL
+
+    STRING          shift and go to state 67
+    NUMBER          shift and go to state 68
+    FLOAT_NUMBER    shift and go to state 69
+    NULL            shift and go to state 70
+
+    value                          shift and go to state 72
+
+state 45
+
+    (45) update_statement -> UPDATE IDENTIFIER SET assignment_list where_clause .
+
+    $end            reduce using rule 45 (update_statement -> UPDATE IDENTIFIER SET assignment_list where_clause .)
+
+
+state 46
+
+    (47) assignment_list -> assignment_list COMMA . assignment
+    (48) assignment -> . IDENTIFIER EQUALS value
+
+    IDENTIFIER      shift and go to state 31
+
+    assignment                     shift and go to state 73
+
+state 47
+
+    (51) where_clause -> WHERE condition .
+    (52) condition -> condition . AND condition
+    (53) condition -> condition . OR condition
+
+    $end            reduce using rule 51 (where_clause -> WHERE condition .)
+    AND             shift and go to state 74
+    OR              shift and go to state 75
+
+
+state 48
+
+    (54) condition -> comparison .
+
+    AND             reduce using rule 54 (condition -> comparison .)
+    OR              reduce using rule 54 (condition -> comparison .)
+    $end            reduce using rule 54 (condition -> comparison .)
+    RPAREN          reduce using rule 54 (condition -> comparison .)
+
+
+state 49
+
+    (55) condition -> LPAREN . condition RPAREN
+    (52) condition -> . condition AND condition
+    (53) condition -> . condition OR condition
+    (54) condition -> . comparison
+    (55) condition -> . LPAREN condition RPAREN
+    (56) comparison -> . IDENTIFIER EQUALS value
+    (57) comparison -> . IDENTIFIER NOT_EQUALS value
+    (58) comparison -> . IDENTIFIER LESS_THAN value
+    (59) comparison -> . IDENTIFIER GREATER_THAN value
+    (60) comparison -> . IDENTIFIER LESS_EQUAL value
+    (61) comparison -> . IDENTIFIER GREATER_EQUAL value
+    (62) comparison -> . IDENTIFIER LIKE value
+
+    LPAREN          shift and go to state 49
+    IDENTIFIER      shift and go to state 50
+
+    condition                      shift and go to state 76
+    comparison                     shift and go to state 48
+
+state 50
+
+    (56) comparison -> IDENTIFIER . EQUALS value
+    (57) comparison -> IDENTIFIER . NOT_EQUALS value
+    (58) comparison -> IDENTIFIER . LESS_THAN value
+    (59) comparison -> IDENTIFIER . GREATER_THAN value
+    (60) comparison -> IDENTIFIER . LESS_EQUAL value
+    (61) comparison -> IDENTIFIER . GREATER_EQUAL value
+    (62) comparison -> IDENTIFIER . LIKE value
+
+    EQUALS          shift and go to state 77
+    NOT_EQUALS      shift and go to state 78
+    LESS_THAN       shift and go to state 79
+    GREATER_THAN    shift and go to state 80
+    LESS_EQUAL      shift and go to state 81
+    GREATER_EQUAL   shift and go to state 82
+    LIKE            shift and go to state 83
+
+
+state 51
+
+    (9) column_definition -> IDENTIFIER data_type .
+    (10) column_definition -> IDENTIFIER data_type . column_constraints
+    (21) column_constraints -> . column_constraint
+    (22) column_constraints -> . column_constraints column_constraint
+    (23) column_constraint -> . PRIMARY KEY
+    (24) column_constraint -> . UNIQUE
+    (25) column_constraint -> . AUTO_INCREMENT
+    (26) column_constraint -> . NOT NULL
+
+    RPAREN          reduce using rule 9 (column_definition -> IDENTIFIER data_type .)
+    COMMA           reduce using rule 9 (column_definition -> IDENTIFIER data_type .)
+    PRIMARY         shift and go to state 86
+    UNIQUE          shift and go to state 87
+    AUTO_INCREMENT  shift and go to state 88
+    NOT             shift and go to state 89
+
+    column_constraints             shift and go to state 84
+    column_constraint              shift and go to state 85
+
+state 52
+
+    (11) data_type -> VARCHAR . LPAREN NUMBER RPAREN
+
+    LPAREN          shift and go to state 90
+
+
+state 53
+
+    (12) data_type -> INT .
+
+    PRIMARY         reduce using rule 12 (data_type -> INT .)
+    UNIQUE          reduce using rule 12 (data_type -> INT .)
+    AUTO_INCREMENT  reduce using rule 12 (data_type -> INT .)
+    NOT             reduce using rule 12 (data_type -> INT .)
+    RPAREN          reduce using rule 12 (data_type -> INT .)
+    COMMA           reduce using rule 12 (data_type -> INT .)
+
+
+state 54
+
+    (13) data_type -> INTEGER .
+
+    PRIMARY         reduce using rule 13 (data_type -> INTEGER .)
+    UNIQUE          reduce using rule 13 (data_type -> INTEGER .)
+    AUTO_INCREMENT  reduce using rule 13 (data_type -> INTEGER .)
+    NOT             reduce using rule 13 (data_type -> INTEGER .)
+    RPAREN          reduce using rule 13 (data_type -> INTEGER .)
+    COMMA           reduce using rule 13 (data_type -> INTEGER .)
+
+
+state 55
+
+    (14) data_type -> FLOAT .
+
+    PRIMARY         reduce using rule 14 (data_type -> FLOAT .)
+    UNIQUE          reduce using rule 14 (data_type -> FLOAT .)
+    AUTO_INCREMENT  reduce using rule 14 (data_type -> FLOAT .)
+    NOT             reduce using rule 14 (data_type -> FLOAT .)
+    RPAREN          reduce using rule 14 (data_type -> FLOAT .)
+    COMMA           reduce using rule 14 (data_type -> FLOAT .)
+
+
+state 56
+
+    (15) data_type -> DOUBLE .
+
+    PRIMARY         reduce using rule 15 (data_type -> DOUBLE .)
+    UNIQUE          reduce using rule 15 (data_type -> DOUBLE .)
+    AUTO_INCREMENT  reduce using rule 15 (data_type -> DOUBLE .)
+    NOT             reduce using rule 15 (data_type -> DOUBLE .)
+    RPAREN          reduce using rule 15 (data_type -> DOUBLE .)
+    COMMA           reduce using rule 15 (data_type -> DOUBLE .)
+
+
+state 57
+
+    (16) data_type -> TEXT .
+
+    PRIMARY         reduce using rule 16 (data_type -> TEXT .)
+    UNIQUE          reduce using rule 16 (data_type -> TEXT .)
+    AUTO_INCREMENT  reduce using rule 16 (data_type -> TEXT .)
+    NOT             reduce using rule 16 (data_type -> TEXT .)
+    RPAREN          reduce using rule 16 (data_type -> TEXT .)
+    COMMA           reduce using rule 16 (data_type -> TEXT .)
+
+
+state 58
+
+    (17) data_type -> BOOLEAN .
+
+    PRIMARY         reduce using rule 17 (data_type -> BOOLEAN .)
+    UNIQUE          reduce using rule 17 (data_type -> BOOLEAN .)
+    AUTO_INCREMENT  reduce using rule 17 (data_type -> BOOLEAN .)
+    NOT             reduce using rule 17 (data_type -> BOOLEAN .)
+    RPAREN          reduce using rule 17 (data_type -> BOOLEAN .)
+    COMMA           reduce using rule 17 (data_type -> BOOLEAN .)
+
+
+state 59
+
+    (18) data_type -> DATE .
+
+    PRIMARY         reduce using rule 18 (data_type -> DATE .)
+    UNIQUE          reduce using rule 18 (data_type -> DATE .)
+    AUTO_INCREMENT  reduce using rule 18 (data_type -> DATE .)
+    NOT             reduce using rule 18 (data_type -> DATE .)
+    RPAREN          reduce using rule 18 (data_type -> DATE .)
+    COMMA           reduce using rule 18 (data_type -> DATE .)
+
+
+state 60
+
+    (19) data_type -> DATETIME .
+
+    PRIMARY         reduce using rule 19 (data_type -> DATETIME .)
+    UNIQUE          reduce using rule 19 (data_type -> DATETIME .)
+    AUTO_INCREMENT  reduce using rule 19 (data_type -> DATETIME .)
+    NOT             reduce using rule 19 (data_type -> DATETIME .)
+    RPAREN          reduce using rule 19 (data_type -> DATETIME .)
+    COMMA           reduce using rule 19 (data_type -> DATETIME .)
+
+
+state 61
+
+    (20) data_type -> TIMESTAMP .
+
+    PRIMARY         reduce using rule 20 (data_type -> TIMESTAMP .)
+    UNIQUE          reduce using rule 20 (data_type -> TIMESTAMP .)
+    AUTO_INCREMENT  reduce using rule 20 (data_type -> TIMESTAMP .)
+    NOT             reduce using rule 20 (data_type -> TIMESTAMP .)
+    RPAREN          reduce using rule 20 (data_type -> TIMESTAMP .)
+    COMMA           reduce using rule 20 (data_type -> TIMESTAMP .)
+
+
+state 62
+
+    (6) create_table_statement -> CREATE TABLE IDENTIFIER LPAREN column_definitions RPAREN .
+
+    $end            reduce using rule 6 (create_table_statement -> CREATE TABLE IDENTIFIER LPAREN column_definitions RPAREN .)
+
+
+state 63
+
+    (8) column_definitions -> column_definitions COMMA . column_definition
+    (9) column_definition -> . IDENTIFIER data_type
+    (10) column_definition -> . IDENTIFIER data_type column_constraints
+
+    IDENTIFIER      shift and go to state 36
+
+    column_definition              shift and go to state 91
+
+state 64
+
+    (32) value_lists -> value_lists COMMA . value_list
+    (33) value_list -> . LPAREN values RPAREN
+
+    LPAREN          shift and go to state 41
+
+    value_list                     shift and go to state 92
+
+state 65
+
+    (33) value_list -> LPAREN values . RPAREN
+    (35) values -> values . COMMA value
+
+    RPAREN          shift and go to state 93
+    COMMA           shift and go to state 94
+
+
+state 66
+
+    (34) values -> value .
+
+    RPAREN          reduce using rule 34 (values -> value .)
+    COMMA           reduce using rule 34 (values -> value .)
+
+
+state 67
+
+    (36) value -> STRING .
+
+    RPAREN          reduce using rule 36 (value -> STRING .)
+    COMMA           reduce using rule 36 (value -> STRING .)
+    WHERE           reduce using rule 36 (value -> STRING .)
+    $end            reduce using rule 36 (value -> STRING .)
+    AND             reduce using rule 36 (value -> STRING .)
+    OR              reduce using rule 36 (value -> STRING .)
+
+
+state 68
+
+    (37) value -> NUMBER .
+
+    RPAREN          reduce using rule 37 (value -> NUMBER .)
+    COMMA           reduce using rule 37 (value -> NUMBER .)
+    WHERE           reduce using rule 37 (value -> NUMBER .)
+    $end            reduce using rule 37 (value -> NUMBER .)
+    AND             reduce using rule 37 (value -> NUMBER .)
+    OR              reduce using rule 37 (value -> NUMBER .)
+
+
+state 69
+
+    (38) value -> FLOAT_NUMBER .
+
+    RPAREN          reduce using rule 38 (value -> FLOAT_NUMBER .)
+    COMMA           reduce using rule 38 (value -> FLOAT_NUMBER .)
+    WHERE           reduce using rule 38 (value -> FLOAT_NUMBER .)
+    $end            reduce using rule 38 (value -> FLOAT_NUMBER .)
+    AND             reduce using rule 38 (value -> FLOAT_NUMBER .)
+    OR              reduce using rule 38 (value -> FLOAT_NUMBER .)
+
+
+state 70
+
+    (39) value -> NULL .
+
+    RPAREN          reduce using rule 39 (value -> NULL .)
+    COMMA           reduce using rule 39 (value -> NULL .)
+    WHERE           reduce using rule 39 (value -> NULL .)
+    $end            reduce using rule 39 (value -> NULL .)
+    AND             reduce using rule 39 (value -> NULL .)
+    OR              reduce using rule 39 (value -> NULL .)
+
+
+state 71
+
+    (28) insert_statement -> INSERT INTO IDENTIFIER LPAREN column_list RPAREN . VALUES value_lists
+
+    VALUES          shift and go to state 95
+
+
+state 72
+
+    (48) assignment -> IDENTIFIER EQUALS value .
+
+    COMMA           reduce using rule 48 (assignment -> IDENTIFIER EQUALS value .)
+    WHERE           reduce using rule 48 (assignment -> IDENTIFIER EQUALS value .)
+    $end            reduce using rule 48 (assignment -> IDENTIFIER EQUALS value .)
+
+
+state 73
+
+    (47) assignment_list -> assignment_list COMMA assignment .
+
+    COMMA           reduce using rule 47 (assignment_list -> assignment_list COMMA assignment .)
+    WHERE           reduce using rule 47 (assignment_list -> assignment_list COMMA assignment .)
+    $end            reduce using rule 47 (assignment_list -> assignment_list COMMA assignment .)
+
+
+state 74
+
+    (52) condition -> condition AND . condition
+    (52) condition -> . condition AND condition
+    (53) condition -> . condition OR condition
+    (54) condition -> . comparison
+    (55) condition -> . LPAREN condition RPAREN
+    (56) comparison -> . IDENTIFIER EQUALS value
+    (57) comparison -> . IDENTIFIER NOT_EQUALS value
+    (58) comparison -> . IDENTIFIER LESS_THAN value
+    (59) comparison -> . IDENTIFIER GREATER_THAN value
+    (60) comparison -> . IDENTIFIER LESS_EQUAL value
+    (61) comparison -> . IDENTIFIER GREATER_EQUAL value
+    (62) comparison -> . IDENTIFIER LIKE value
+
+    LPAREN          shift and go to state 49
+    IDENTIFIER      shift and go to state 50
+
+    condition                      shift and go to state 96
+    comparison                     shift and go to state 48
+
+state 75
+
+    (53) condition -> condition OR . condition
+    (52) condition -> . condition AND condition
+    (53) condition -> . condition OR condition
+    (54) condition -> . comparison
+    (55) condition -> . LPAREN condition RPAREN
+    (56) comparison -> . IDENTIFIER EQUALS value
+    (57) comparison -> . IDENTIFIER NOT_EQUALS value
+    (58) comparison -> . IDENTIFIER LESS_THAN value
+    (59) comparison -> . IDENTIFIER GREATER_THAN value
+    (60) comparison -> . IDENTIFIER LESS_EQUAL value
+    (61) comparison -> . IDENTIFIER GREATER_EQUAL value
+    (62) comparison -> . IDENTIFIER LIKE value
+
+    LPAREN          shift and go to state 49
+    IDENTIFIER      shift and go to state 50
+
+    condition                      shift and go to state 97
+    comparison                     shift and go to state 48
+
+state 76
+
+    (55) condition -> LPAREN condition . RPAREN
+    (52) condition -> condition . AND condition
+    (53) condition -> condition . OR condition
+
+    RPAREN          shift and go to state 98
+    AND             shift and go to state 74
+    OR              shift and go to state 75
+
+
+state 77
+
+    (56) comparison -> IDENTIFIER EQUALS . value
+    (36) value -> . STRING
+    (37) value -> . NUMBER
+    (38) value -> . FLOAT_NUMBER
+    (39) value -> . NULL
+
+    STRING          shift and go to state 67
+    NUMBER          shift and go to state 68
+    FLOAT_NUMBER    shift and go to state 69
+    NULL            shift and go to state 70
+
+    value                          shift and go to state 99
+
+state 78
+
+    (57) comparison -> IDENTIFIER NOT_EQUALS . value
+    (36) value -> . STRING
+    (37) value -> . NUMBER
+    (38) value -> . FLOAT_NUMBER
+    (39) value -> . NULL
+
+    STRING          shift and go to state 67
+    NUMBER          shift and go to state 68
+    FLOAT_NUMBER    shift and go to state 69
+    NULL            shift and go to state 70
+
+    value                          shift and go to state 100
+
+state 79
+
+    (58) comparison -> IDENTIFIER LESS_THAN . value
+    (36) value -> . STRING
+    (37) value -> . NUMBER
+    (38) value -> . FLOAT_NUMBER
+    (39) value -> . NULL
+
+    STRING          shift and go to state 67
+    NUMBER          shift and go to state 68
+    FLOAT_NUMBER    shift and go to state 69
+    NULL            shift and go to state 70
+
+    value                          shift and go to state 101
+
+state 80
+
+    (59) comparison -> IDENTIFIER GREATER_THAN . value
+    (36) value -> . STRING
+    (37) value -> . NUMBER
+    (38) value -> . FLOAT_NUMBER
+    (39) value -> . NULL
+
+    STRING          shift and go to state 67
+    NUMBER          shift and go to state 68
+    FLOAT_NUMBER    shift and go to state 69
+    NULL            shift and go to state 70
+
+    value                          shift and go to state 102
+
+state 81
+
+    (60) comparison -> IDENTIFIER LESS_EQUAL . value
+    (36) value -> . STRING
+    (37) value -> . NUMBER
+    (38) value -> . FLOAT_NUMBER
+    (39) value -> . NULL
+
+    STRING          shift and go to state 67
+    NUMBER          shift and go to state 68
+    FLOAT_NUMBER    shift and go to state 69
+    NULL            shift and go to state 70
+
+    value                          shift and go to state 103
+
+state 82
+
+    (61) comparison -> IDENTIFIER GREATER_EQUAL . value
+    (36) value -> . STRING
+    (37) value -> . NUMBER
+    (38) value -> . FLOAT_NUMBER
+    (39) value -> . NULL
+
+    STRING          shift and go to state 67
+    NUMBER          shift and go to state 68
+    FLOAT_NUMBER    shift and go to state 69
+    NULL            shift and go to state 70
+
+    value                          shift and go to state 104
+
+state 83
+
+    (62) comparison -> IDENTIFIER LIKE . value
+    (36) value -> . STRING
+    (37) value -> . NUMBER
+    (38) value -> . FLOAT_NUMBER
+    (39) value -> . NULL
+
+    STRING          shift and go to state 67
+    NUMBER          shift and go to state 68
+    FLOAT_NUMBER    shift and go to state 69
+    NULL            shift and go to state 70
+
+    value                          shift and go to state 105
+
+state 84
+
+    (10) column_definition -> IDENTIFIER data_type column_constraints .
+    (22) column_constraints -> column_constraints . column_constraint
+    (23) column_constraint -> . PRIMARY KEY
+    (24) column_constraint -> . UNIQUE
+    (25) column_constraint -> . AUTO_INCREMENT
+    (26) column_constraint -> . NOT NULL
+
+    RPAREN          reduce using rule 10 (column_definition -> IDENTIFIER data_type column_constraints .)
+    COMMA           reduce using rule 10 (column_definition -> IDENTIFIER data_type column_constraints .)
+    PRIMARY         shift and go to state 86
+    UNIQUE          shift and go to state 87
+    AUTO_INCREMENT  shift and go to state 88
+    NOT             shift and go to state 89
+
+    column_constraint              shift and go to state 106
+
+state 85
+
+    (21) column_constraints -> column_constraint .
+
+    PRIMARY         reduce using rule 21 (column_constraints -> column_constraint .)
+    UNIQUE          reduce using rule 21 (column_constraints -> column_constraint .)
+    AUTO_INCREMENT  reduce using rule 21 (column_constraints -> column_constraint .)
+    NOT             reduce using rule 21 (column_constraints -> column_constraint .)
+    RPAREN          reduce using rule 21 (column_constraints -> column_constraint .)
+    COMMA           reduce using rule 21 (column_constraints -> column_constraint .)
+
+
+state 86
+
+    (23) column_constraint -> PRIMARY . KEY
+
+    KEY             shift and go to state 107
+
+
+state 87
+
+    (24) column_constraint -> UNIQUE .
+
+    PRIMARY         reduce using rule 24 (column_constraint -> UNIQUE .)
+    UNIQUE          reduce using rule 24 (column_constraint -> UNIQUE .)
+    AUTO_INCREMENT  reduce using rule 24 (column_constraint -> UNIQUE .)
+    NOT             reduce using rule 24 (column_constraint -> UNIQUE .)
+    RPAREN          reduce using rule 24 (column_constraint -> UNIQUE .)
+    COMMA           reduce using rule 24 (column_constraint -> UNIQUE .)
+
+
+state 88
+
+    (25) column_constraint -> AUTO_INCREMENT .
+
+    PRIMARY         reduce using rule 25 (column_constraint -> AUTO_INCREMENT .)
+    UNIQUE          reduce using rule 25 (column_constraint -> AUTO_INCREMENT .)
+    AUTO_INCREMENT  reduce using rule 25 (column_constraint -> AUTO_INCREMENT .)
+    NOT             reduce using rule 25 (column_constraint -> AUTO_INCREMENT .)
+    RPAREN          reduce using rule 25 (column_constraint -> AUTO_INCREMENT .)
+    COMMA           reduce using rule 25 (column_constraint -> AUTO_INCREMENT .)
+
+
+state 89
+
+    (26) column_constraint -> NOT . NULL
+
+    NULL            shift and go to state 108
+
+
+state 90
+
+    (11) data_type -> VARCHAR LPAREN . NUMBER RPAREN
+
+    NUMBER          shift and go to state 109
+
+
+state 91
+
+    (8) column_definitions -> column_definitions COMMA column_definition .
+
+    RPAREN          reduce using rule 8 (column_definitions -> column_definitions COMMA column_definition .)
+    COMMA           reduce using rule 8 (column_definitions -> column_definitions COMMA column_definition .)
+
+
+state 92
+
+    (32) value_lists -> value_lists COMMA value_list .
+
+    COMMA           reduce using rule 32 (value_lists -> value_lists COMMA value_list .)
+    $end            reduce using rule 32 (value_lists -> value_lists COMMA value_list .)
+
+
+state 93
+
+    (33) value_list -> LPAREN values RPAREN .
+
+    COMMA           reduce using rule 33 (value_list -> LPAREN values RPAREN .)
+    $end            reduce using rule 33 (value_list -> LPAREN values RPAREN .)
+
+
+state 94
+
+    (35) values -> values COMMA . value
+    (36) value -> . STRING
+    (37) value -> . NUMBER
+    (38) value -> . FLOAT_NUMBER
+    (39) value -> . NULL
+
+    STRING          shift and go to state 67
+    NUMBER          shift and go to state 68
+    FLOAT_NUMBER    shift and go to state 69
+    NULL            shift and go to state 70
+
+    value                          shift and go to state 110
+
+state 95
+
+    (28) insert_statement -> INSERT INTO IDENTIFIER LPAREN column_list RPAREN VALUES . value_lists
+    (31) value_lists -> . value_list
+    (32) value_lists -> . value_lists COMMA value_list
+    (33) value_list -> . LPAREN values RPAREN
+
+    LPAREN          shift and go to state 41
+
+    value_lists                    shift and go to state 111
+    value_list                     shift and go to state 40
+
+state 96
+
+    (52) condition -> condition AND condition .
+    (52) condition -> condition . AND condition
+    (53) condition -> condition . OR condition
+
+    AND             reduce using rule 52 (condition -> condition AND condition .)
+    OR              reduce using rule 52 (condition -> condition AND condition .)
+    $end            reduce using rule 52 (condition -> condition AND condition .)
+    RPAREN          reduce using rule 52 (condition -> condition AND condition .)
+
+  ! AND             [ shift and go to state 74 ]
+  ! OR              [ shift and go to state 75 ]
+
+
+state 97
+
+    (53) condition -> condition OR condition .
+    (52) condition -> condition . AND condition
+    (53) condition -> condition . OR condition
+
+    OR              reduce using rule 53 (condition -> condition OR condition .)
+    $end            reduce using rule 53 (condition -> condition OR condition .)
+    RPAREN          reduce using rule 53 (condition -> condition OR condition .)
+    AND             shift and go to state 74
+
+  ! AND             [ reduce using rule 53 (condition -> condition OR condition .) ]
+  ! OR              [ shift and go to state 75 ]
+
+
+state 98
+
+    (55) condition -> LPAREN condition RPAREN .
+
+    AND             reduce using rule 55 (condition -> LPAREN condition RPAREN .)
+    OR              reduce using rule 55 (condition -> LPAREN condition RPAREN .)
+    $end            reduce using rule 55 (condition -> LPAREN condition RPAREN .)
+    RPAREN          reduce using rule 55 (condition -> LPAREN condition RPAREN .)
+
+
+state 99
+
+    (56) comparison -> IDENTIFIER EQUALS value .
+
+    AND             reduce using rule 56 (comparison -> IDENTIFIER EQUALS value .)
+    OR              reduce using rule 56 (comparison -> IDENTIFIER EQUALS value .)
+    $end            reduce using rule 56 (comparison -> IDENTIFIER EQUALS value .)
+    RPAREN          reduce using rule 56 (comparison -> IDENTIFIER EQUALS value .)
+
+
+state 100
+
+    (57) comparison -> IDENTIFIER NOT_EQUALS value .
+
+    AND             reduce using rule 57 (comparison -> IDENTIFIER NOT_EQUALS value .)
+    OR              reduce using rule 57 (comparison -> IDENTIFIER NOT_EQUALS value .)
+    $end            reduce using rule 57 (comparison -> IDENTIFIER NOT_EQUALS value .)
+    RPAREN          reduce using rule 57 (comparison -> IDENTIFIER NOT_EQUALS value .)
+
+
+state 101
+
+    (58) comparison -> IDENTIFIER LESS_THAN value .
+
+    AND             reduce using rule 58 (comparison -> IDENTIFIER LESS_THAN value .)
+    OR              reduce using rule 58 (comparison -> IDENTIFIER LESS_THAN value .)
+    $end            reduce using rule 58 (comparison -> IDENTIFIER LESS_THAN value .)
+    RPAREN          reduce using rule 58 (comparison -> IDENTIFIER LESS_THAN value .)
+
+
+state 102
+
+    (59) comparison -> IDENTIFIER GREATER_THAN value .
+
+    AND             reduce using rule 59 (comparison -> IDENTIFIER GREATER_THAN value .)
+    OR              reduce using rule 59 (comparison -> IDENTIFIER GREATER_THAN value .)
+    $end            reduce using rule 59 (comparison -> IDENTIFIER GREATER_THAN value .)
+    RPAREN          reduce using rule 59 (comparison -> IDENTIFIER GREATER_THAN value .)
+
+
+state 103
+
+    (60) comparison -> IDENTIFIER LESS_EQUAL value .
+
+    AND             reduce using rule 60 (comparison -> IDENTIFIER LESS_EQUAL value .)
+    OR              reduce using rule 60 (comparison -> IDENTIFIER LESS_EQUAL value .)
+    $end            reduce using rule 60 (comparison -> IDENTIFIER LESS_EQUAL value .)
+    RPAREN          reduce using rule 60 (comparison -> IDENTIFIER LESS_EQUAL value .)
+
+
+state 104
+
+    (61) comparison -> IDENTIFIER GREATER_EQUAL value .
+
+    AND             reduce using rule 61 (comparison -> IDENTIFIER GREATER_EQUAL value .)
+    OR              reduce using rule 61 (comparison -> IDENTIFIER GREATER_EQUAL value .)
+    $end            reduce using rule 61 (comparison -> IDENTIFIER GREATER_EQUAL value .)
+    RPAREN          reduce using rule 61 (comparison -> IDENTIFIER GREATER_EQUAL value .)
+
+
+state 105
+
+    (62) comparison -> IDENTIFIER LIKE value .
+
+    AND             reduce using rule 62 (comparison -> IDENTIFIER LIKE value .)
+    OR              reduce using rule 62 (comparison -> IDENTIFIER LIKE value .)
+    $end            reduce using rule 62 (comparison -> IDENTIFIER LIKE value .)
+    RPAREN          reduce using rule 62 (comparison -> IDENTIFIER LIKE value .)
+
+
+state 106
+
+    (22) column_constraints -> column_constraints column_constraint .
+
+    PRIMARY         reduce using rule 22 (column_constraints -> column_constraints column_constraint .)
+    UNIQUE          reduce using rule 22 (column_constraints -> column_constraints column_constraint .)
+    AUTO_INCREMENT  reduce using rule 22 (column_constraints -> column_constraints column_constraint .)
+    NOT             reduce using rule 22 (column_constraints -> column_constraints column_constraint .)
+    RPAREN          reduce using rule 22 (column_constraints -> column_constraints column_constraint .)
+    COMMA           reduce using rule 22 (column_constraints -> column_constraints column_constraint .)
+
+
+state 107
+
+    (23) column_constraint -> PRIMARY KEY .
+
+    PRIMARY         reduce using rule 23 (column_constraint -> PRIMARY KEY .)
+    UNIQUE          reduce using rule 23 (column_constraint -> PRIMARY KEY .)
+    AUTO_INCREMENT  reduce using rule 23 (column_constraint -> PRIMARY KEY .)
+    NOT             reduce using rule 23 (column_constraint -> PRIMARY KEY .)
+    RPAREN          reduce using rule 23 (column_constraint -> PRIMARY KEY .)
+    COMMA           reduce using rule 23 (column_constraint -> PRIMARY KEY .)
+
+
+state 108
+
+    (26) column_constraint -> NOT NULL .
+
+    PRIMARY         reduce using rule 26 (column_constraint -> NOT NULL .)
+    UNIQUE          reduce using rule 26 (column_constraint -> NOT NULL .)
+    AUTO_INCREMENT  reduce using rule 26 (column_constraint -> NOT NULL .)
+    NOT             reduce using rule 26 (column_constraint -> NOT NULL .)
+    RPAREN          reduce using rule 26 (column_constraint -> NOT NULL .)
+    COMMA           reduce using rule 26 (column_constraint -> NOT NULL .)
+
+
+state 109
+
+    (11) data_type -> VARCHAR LPAREN NUMBER . RPAREN
+
+    RPAREN          shift and go to state 112
+
+
+state 110
+
+    (35) values -> values COMMA value .
+
+    RPAREN          reduce using rule 35 (values -> values COMMA value .)
+    COMMA           reduce using rule 35 (values -> values COMMA value .)
+
+
+state 111
+
+    (28) insert_statement -> INSERT INTO IDENTIFIER LPAREN column_list RPAREN VALUES value_lists .
+    (32) value_lists -> value_lists . COMMA value_list
+
+    $end            reduce using rule 28 (insert_statement -> INSERT INTO IDENTIFIER LPAREN column_list RPAREN VALUES value_lists .)
+    COMMA           shift and go to state 64
+
+
+state 112
+
+    (11) data_type -> VARCHAR LPAREN NUMBER RPAREN .
+
+    PRIMARY         reduce using rule 11 (data_type -> VARCHAR LPAREN NUMBER RPAREN .)
+    UNIQUE          reduce using rule 11 (data_type -> VARCHAR LPAREN NUMBER RPAREN .)
+    AUTO_INCREMENT  reduce using rule 11 (data_type -> VARCHAR LPAREN NUMBER RPAREN .)
+    NOT             reduce using rule 11 (data_type -> VARCHAR LPAREN NUMBER RPAREN .)
+    RPAREN          reduce using rule 11 (data_type -> VARCHAR LPAREN NUMBER RPAREN .)
+    COMMA           reduce using rule 11 (data_type -> VARCHAR LPAREN NUMBER RPAREN .)
+

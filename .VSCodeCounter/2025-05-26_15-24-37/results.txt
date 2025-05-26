@@ -1,0 +1,55 @@
+Date : 2025-05-26 15:24:37
+Directory : c:\Users\vavullapati\Documents\code\vdb
+Total : 22 files,  13693 codes, 329 comments, 2315 blanks, all 16337 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| Markdown           |          5 |     10,465 |          0 |      1,478 |     11,943 |
+| Python             |         12 |      3,163 |        328 |        835 |      4,326 |
+| JSON               |          2 |         44 |          0 |          0 |         44 |
+| JSON with Comments |          1 |         19 |          0 |          0 |         19 |
+| pip requirements   |          1 |          1 |          0 |          0 |          1 |
+| Ignore             |          1 |          1 |          1 |          2 |          4 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                 | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                    |         22 |     13,693 |        329 |      2,315 |     16,337 |
+| . (Files)                                                                                                            |         18 |      4,183 |        329 |      1,188 |      5,700 |
+| .specstory                                                                                                           |          2 |      9,466 |          0 |      1,127 |     10,593 |
+| .specstory\history                                                                                                   |          2 |      9,466 |          0 |      1,127 |     10,593 |
+| db                                                                                                                   |          2 |         44 |          0 |          0 |         44 |
++----------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                                                             | language           | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| c:\Users\vavullapati\Documents\code\vdb\.cursorindexingignore                                                        | Ignore             |          1 |          1 |          2 |          4 |
+| c:\Users\vavullapati\Documents\code\vdb\.specstory\history\2025-05-25_04-24-python-crud-operations-for-json-files.md | Markdown           |          9 |          0 |         12 |         21 |
+| c:\Users\vavullapati\Documents\code\vdb\.specstory\history\2025-05-25_04-26-python-crud-operations-on-json-files.md  | Markdown           |      9,457 |          0 |      1,115 |     10,572 |
+| c:\Users\vavullapati\Documents\code\vdb\README.md                                                                    | Markdown           |        284 |          0 |        107 |        391 |
+| c:\Users\vavullapati\Documents\code\vdb\README_SQL_JSON_Integration.md                                               | Markdown           |        420 |          0 |        137 |        557 |
+| c:\Users\vavullapati\Documents\code\vdb\README_SQL_Parser.md                                                         | Markdown           |        295 |          0 |        107 |        402 |
+| c:\Users\vavullapati\Documents\code\vdb\config.py                                                                    | Python             |        135 |          8 |         32 |        175 |
+| c:\Users\vavullapati\Documents\code\vdb\db\_schemas.json                                                             | JSON               |         28 |          0 |          0 |         28 |
+| c:\Users\vavullapati\Documents\code\vdb\db\users.json                                                                | JSON               |         16 |          0 |          0 |         16 |
+| c:\Users\vavullapati\Documents\code\vdb\example_sql_json.py                                                          | Python             |        254 |         27 |         74 |        355 |
+| c:\Users\vavullapati\Documents\code\vdb\example_usage.py                                                             | Python             |        164 |         37 |         64 |        265 |
+| c:\Users\vavullapati\Documents\code\vdb\json_crud.py                                                                 | Python             |        324 |         16 |         91 |        431 |
+| c:\Users\vavullapati\Documents\code\vdb\parsetab.py                                                                  | Python             |         82 |          3 |          8 |         93 |
+| c:\Users\vavullapati\Documents\code\vdb\quick_test.py                                                                | Python             |         31 |         11 |         15 |         57 |
+| c:\Users\vavullapati\Documents\code\vdb\requirements.txt                                                             | pip requirements   |          1 |          0 |          0 |          1 |
+| c:\Users\vavullapati\Documents\code\vdb\settings.json                                                                | JSON with Comments |         19 |          0 |          0 |         19 |
+| c:\Users\vavullapati\Documents\code\vdb\sql_json_engine.py                                                           | Python             |        527 |         46 |        109 |        682 |
+| c:\Users\vavullapati\Documents\code\vdb\sql_parser.py                                                                | Python             |        480 |         40 |        114 |        634 |
+| c:\Users\vavullapati\Documents\code\vdb\sql_parser_example.py                                                        | Python             |        195 |          6 |         46 |        247 |
+| c:\Users\vavullapati\Documents\code\vdb\test_json_crud.py                                                            | Python             |        261 |         58 |         96 |        415 |
+| c:\Users\vavullapati\Documents\code\vdb\test_sql_json_engine.py                                                      | Python             |        363 |         60 |        101 |        524 |
+| c:\Users\vavullapati\Documents\code\vdb\test_sql_parser.py                                                           | Python             |        347 |         16 |         85 |        448 |
+| Total                                                                                                                |                    |     13,693 |        329 |      2,315 |     16,337 |
++----------------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+

@@ -1,0 +1,19 @@
+{
+  "database": {
+    "directory": "db",
+    "auto_create_directory": true,
+    "default_file_extension": ".json",
+    "backup_enabled": false,
+    "backup_directory": "db/backups"
+  },
+  "logging": {
+    "enabled": false,
+    "level": "INFO",
+    "file": "db/crud.log"
+  },
+  "performance": {
+    "cache_enabled": false,
+    "max_file_size_mb": 10,
+    "pretty_print": true
+  }
+} 
